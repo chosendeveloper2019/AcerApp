@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ข่าวสาร</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Wide card with share menu button -->
+     <style>
+        .demo-card-wide.mdl-card {
+          width: 90%;
+          margin: auto;
+          margin-bottom: 20px;
+        }
+        .demo-card-wide > .mdl-card__title {
+          color: #fff;
+          height: 176px;
+          background: url('../assets/demos/welcome_card.jpg') center / cover;
+        }
+        .demo-card-wide > .mdl-card__menu {
+          color: #fff;
+        }
+        </style>
+        
+        
+</head>
+
+<body>
+
+    <!-- Always shows a header, even in smaller screens. -->
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+          <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title">News</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            
+          </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">News</span>
+            <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" href="thai.html">Thai</a>
+            <a class="mdl-navigation__link" href="us.html">Poland</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+            <a class="mdl-navigation__link" href="">Link</a>
+          </nav>
+        </div>
+        <main class="mdl-layout__content">
+          <div class="page-content">
+
+            <div id="content">
+
+                
+            </div>
+
+          </div>
+        </main>
+      </div>
+
+      <script>
+          $(document).ready(function(){
+            
+            // $("#content").html("Kritsana")
+            // $( "#input1" ).change(function() {
+            //     $("#result").html(this.value)
+            // });
+            var url = "https://newsapi.org/v2/top-headlines?country=pl&apiKey=de6771448adc46979ab5c4049d192c76"
+            $.get(url,function(data,status){
+              console.log(data)
+              var content = ""
+              for(var i=  0; i < data.articles.length;i++){
+                    // console.log(data.articles[i].title)
+                    content += '<div class="demo-card-wide mdl-card mdl-shadow--2dp">\
+                                    <div class="mdl-card__title" style=" background: url('+data.articles[i].urlToImage+') center/cover">\
+                                        <h2 class="mdl-card__title-text">'+data.articles[i].title+'</h2>\
+                                    </div>\
+                                    <div class="mdl-card__supporting-text">\
+                                       '+data.articles[i].description+'\
+                                    </div>\
+                                    <div class="mdl-card__actions mdl-card--border">\
+                                        <a href="'+data.articles[i].url+'" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">\
+                                          อ่านข่าวสาร\
+                                        </a>\
+                                    </div>\
+                                    <div class="mdl-card__menu">\
+                                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">\
+                                        <i class="material-icons">share</i>\
+                                        </button>\
+                                    </div>\
+                                    </div>'
+              }
+
+                $("#content").html(content)
+
+
+
+            })
+
+
+
+          })
+      
+      </script>
+
+</body>
+
+</html>
